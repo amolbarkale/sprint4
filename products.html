@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+      img:hover {
+        width: 250px;
+        height: 270px;
+        border: 1px solid black;
+      }
+      #menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        margin-left: 150px;
+      }
+      #navbar {
+        background-color: rgb(77, 14, 14);
+        color: white;
+        height: 100px;
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      #cart {
+        display: block;
+        float: right;
+        width: 250px;
+        height: 50px;
+        font-size: 30px;
+        background-color: rgb(77, 14, 14);
+        color: white;
+        font-weight: 700;
+        margin: 0 20px 50px 0;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cont">
+      <div id="navbar"><h1>TANISHQ JEWELLERY</h1></div>
+      <div id="heading"></div>
+      <div id="cart">Your cart itmes 0</div>
+      <div id="menu"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function show() {
+    let items = [
+      {
+        image:
+          "http://www.udaipurblog.com/wp-content/uploads/2018/12/My-Gold-Guide-600x410.jpg",
+        name: "Udaipur neckless",
+        price: "Price: $250",
+        total: 250,
+      },
+      {
+        image:
+          "https://www.tanishq.co.in/wps/wcm/connect/tanishq/a58fa21b-eec3-43bf-8758-598cdc7ebab2/images%252FEar-ring-bangle.png?MOD=AJPERES&CVID=",
+        name: "Udaipur neckless",
+        price: "Price: $250",
+        total: 250,
+      },
+      {
+        image:
+          "https://i.pinimg.com/originals/43/b6/0a/43b60accbbf6f1e822b1eee8de7ec760.jpg",
+        name: "Udaipur neckless",
+        price: "Price: $200",
+        total: 200,
+      },
+      {
+        image:
+          "https://images-na.ssl-images-amazon.com/images/I/81%2BaEuZFKTL._UL1500_.jpg",
+        name: "Udaipur neckless",
+        price: "Price: $350",
+        total: 350,
+      },
+      {
+        image:
+          "http://www.udaipurblog.com/wp-content/uploads/2018/12/My-Gold-Guide-600x410.jpg",
+        name: "Udaipur neckless",
+        price: "Price: $100",
+        total: 100,
+      },
+      {
+        image:
+          "https://images.naptol.com/usr/local/csp/staticContent/product_images/horizontal/750x750/2-Heavy-Gold-Jewellery-Sets-2.jpg",
+        name: "Udaipur neckless",
+        price: "Price: $50",
+        total: 50,
+      },
+    ];
+    localStorage.setItem("items", JSON.stringify(items));
+
+    let data = JSON.parse(localStorage.getItem("items"));
+
+    let menu = document.getElementById("menu");
+
+    for (var i = 0; i < data.length; i++) {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.src = data[i].image;
+
+      let name = document.createElement("p");
+      name.innerHTML = data[i].name;
+
+      let price = document.createElement("p");
+      price.innerHTML = data[i].price;
+
+      let btn = document.createElement("button");
+      btn.innerText = "Add to cart";
+      btn.style.margin = `${10}` + "px";
+      btn.addEventListener("click", fun);
+      div.append(img, name, price, btn);
+      menu.appendChild(div);
+    }
+  }
+  show();
+  let count = 0;
+
+  function fun() {
+    count++;
+    let add = document.getElementById("cart");
+    add.innerHTML = `Your cart items ${count}`;
+    add.addEventListener("click", fun2);
+  }
+
+  function fun2() {
+    let cart1 = document.getElementById("cart");
+    window.location.href = "cartitems.html";
+  }
+</script>

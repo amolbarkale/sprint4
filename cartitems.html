@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #navbar {
+        background-color: rgb(77, 14, 14);
+        color: white;
+        height: 100px;
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+      img:hover {
+        width: 250px;
+        height: 270px;
+        border: 1px solid black;
+      }
+      #menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        margin-left: 150px;
+      }
+      button {
+        width: 250px;
+        height: 50px;
+        margin-left: 600px;
+        font-size: 20px;
+        font-weight: 700;
+        border: 1px solid black;
+      }
+      #payment button {
+        width: 250px;
+        font-size: 20px;
+        font-weight: 700;
+        border: 1px solid black;
+      }
+      #payment div {
+        width: 30%;
+        border: 1px solid black;
+        background-color: gray;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 15px;
+        color: black;
+        font-size: 25px;
+        font-weight: 700;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cont">
+      <div id="navbar"><h1>Your cart!</h1></div>
+      <div id="menu"></div>
+      <button onclick="promo()">Check out here</button>
+      <div id="payment"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function cartlist() {
+    let data = JSON.parse(localStorage.getItem("items"));
+
+    let menu = document.getElementById("menu");
+
+    for (var i = 0; i < data.length / 2; i++) {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.src = data[i].image;
+
+      let name = document.createElement("p");
+      name.innerHTML = data[i].name;
+
+      let price = document.createElement("p");
+      price.innerHTML = data[i].price;
+
+      div.append(img, name, price);
+      menu.appendChild(div);
+    }
+  }
+  cartlist();
+
+  function promo() {
+    let payment = document.getElementById("payment");
+    let div = document.createElement("div");
+    let greet = document.createElement("p");
+    greet.innertext = "You can pay here";
+    let sum = document.createElement("p");
+    sum.innerHTML = `Toatl bill amount id $750`;
+    let total = document.createElement("button");
+    total.innerText = "Apply promo";
+    total.addEventListener("click", coupon);
+    div.append(greet, sum, total);
+    payment.appendChild(div);
+  }
+  function coupon() {
+    let sum = document.createElement("p");
+    let prompt = window.prompt("Enter 30 to Apply MASAI30 30% off");
+    sum.innerHTML = `Your total bill amout is $525`;
+    window.location.href = "payment.html";
+  }
+</script>
